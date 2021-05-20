@@ -48,7 +48,11 @@ func main() {
 	interfaces := interfaces.NewUser(usecase)
 
 	engine := gin.Default()
-	engine.GET("/", interfaces.CreateUser())
+	engine.GET("/", func(c *gin.Context) {
+		c.String(200, "Hello Gin!!")
+	})
+	// engine.GET("/users", interfaces.GetUsers())
+	engine.POST("/users", interfaces.CreateUser())
 	engine.Run(":3000")
 
 }

@@ -32,7 +32,7 @@ func (u user) CreateUser() gin.HandlerFunc {
 			Email:    "examole2@gmail.com",
 			Password: "password2",
 		}
-		// 処理って毎回行われてるの??
+
 		err := u.usecase.CreateUser(user)
 		if err != nil {
 			log.Print(err)
@@ -41,7 +41,7 @@ func (u user) CreateUser() gin.HandlerFunc {
 			})
 		}
 		c.JSON(http.StatusOK, gin.H{
-			"message": "careted",
+			"message": user,
 		})
 	}
 }
