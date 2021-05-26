@@ -27,8 +27,7 @@ func main() {
 
 	// func GetUser(id int) (user User, err error) {
 	// 	user = User{}
-	// 	cmd := `select id, uuid, name, email, password
-	// 	from users where id = ?`
+	// 	cmd := `select id, uuid, name, email, password from users where id = ?`
 	// 	err = Db.QueryRow(cmd, id).Scan(
 	// 		&user.ID,
 	// 		&user.Name,
@@ -52,7 +51,7 @@ func main() {
 		c.String(200, "Hello Gin!!")
 	})
 	// engine.GET("/users", interfaces.GetUsers())
-	engine.POST("/users", interfaces.CreateUser())
+	engine.GET("/users", interfaces.CreateUser())
 	engine.Run(":3000")
 
 }

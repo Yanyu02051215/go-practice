@@ -9,22 +9,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type User interface {
+type UserInterface interface {
 	CreateUser() gin.HandlerFunc
 }
 
-type user struct {
-	usecase usecases.User
+type userInterface struct {
+	usecase usecases.UserUseCase
 }
 
 // 引数のusecasesはusecaseのCreateUserで作られたからusecases.Userの構造体になっているはず??
-func NewUser(usecase usecases.User) User {
-	return &user{
+func NewUser(usecase usecases.UserUseCase) UserInterface {
+	return &userInterface{
 		usecase: usecase,
 	}
 }
 
-func (u user) CreateUser() gin.HandlerFunc {
+func (u userInterface) CreateUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user := models.User{
 			ID:       1,
