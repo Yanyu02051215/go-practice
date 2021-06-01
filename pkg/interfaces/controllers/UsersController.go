@@ -1,39 +1,39 @@
-package interfaces
+package controllers
 
 import (
-	"go-practice/pkg/domains/models"
-	"go-practice/pkg/usecases"
+	"go-practice/pkg/domain"
+	"go-practice/pkg/usecase"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type UserInterface interface {
+type UsersController interface {
 	CreateUser() gin.HandlerFunc
 }
 
-type userInterface struct {
-	usecase usecases.UserUseCase
+type usersController struct {
+	usecase usecase.UserUseCase
 }
 
 // 引数のusecasesはusecaseのCreateUserで作られたからusecases.Userの構造体になっているはず??
-func NewUser(usecase usecases.UserUseCase) UserInterface {
-	return &userInterface{
+func NewUserController(usecase usecase.UserUseCase) UsersController {
+	return &usersController{
 		usecase: usecase,
 	}
 }
 
-func (u userInterface) CreateUser() gin.HandlerFunc {
+func (u usersController) CreateUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		user := models.User{
+		user := domain.User{
 			ID:       1,
 			Name:     "JIRO",
 			Email:    "examole2@gmail.com",
 			Password: "password2",
 		}
 
-		err := u.usecase.CreateUser(user)
+		err := u.usecase.RegisterUser(user)
 		if err != nil {
 			log.Print(err)
 			c.JSON(http.StatusInternalServerError, gin.H{

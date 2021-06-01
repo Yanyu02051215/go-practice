@@ -1,14 +1,11 @@
 package main
 
 import (
-	// "database/sql"
-	"go-practice/pkg/infras"
-	"go-practice/pkg/interfaces"
-	"go-practice/pkg/usecases"
-	// "log"
-
-	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"go-practice/pkg/infrastructure"
+	"go-practice/pkg/interfaces/controllers"
+	"go-practice/pkg/interfaces/database"
+	"go-practice/pkg/usecase"
 )
 
 func main() {
@@ -42,16 +39,9 @@ func main() {
 	// 	log.Fatal(err)
 	// }
 
-	repository := infras.NewUser()
-	usecase := usecases.NewUser(repository)
-	interfaces := interfaces.NewUser(usecase)
+	repository := database.NewUserRepository()
+	usecase := usecase.NewUserUsecase(repository)
+	controllers := controllers.NewUserController(usecase)
 
-	engine := gin.Default()
-	engine.GET("/", func(c *gin.Context) {
-		c.String(200, "Hello Gin!!")
-	})
-	// engine.GET("/users", interfaces.GetUsers())
-	engine.GET("/users", interfaces.CreateUser())
-	engine.Run(":3000")
-
+	infrastructure.SetUpRouting(controllers)
 }

@@ -1,4 +1,4 @@
-package models
+package domain
 
 // 構造体は型をまとめたもの
 type User struct {
