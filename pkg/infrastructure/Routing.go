@@ -10,7 +10,9 @@ func SetUpRouting(userController controllers.UsersController) {
 	engine.GET("/", func(c *gin.Context) {
 		c.String(200, "Hello Gin!!")
 	})
-	// engine.GET("/users", interfaces.GetUsers())
-	engine.GET("/users", userController.CreateUser())
+	engine.GET("/users", userController.GetUsers())
+	engine.GET("/user/:id", userController.GetUser())
+	engine.PUT("/users/:id", userController.UpdateUser())
+	engine.DELETE("/user/:id", userController.DeleteUser())
 	engine.Run(":3000")
 }
