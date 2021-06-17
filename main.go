@@ -18,6 +18,5 @@ func main() {
 	usecase := usecase.NewUserUsecase(repository)
 	controllers := controllers.NewUserController(usecase)
 
-	infrastructure.SetUpUserRouting(controllers, controllers2)
-	// infrastructure.SetUpTodoRouting(controllers2)
+	infrastructure.SetUpRouting(controllers, controllers2)
 }

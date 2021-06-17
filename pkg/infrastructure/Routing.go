@@ -5,7 +5,7 @@ import (
 	"go-practice/pkg/interfaces/controllers"
 )
 
-func SetUpUserRouting(userController controllers.UsersController, todoController controllers.ToDosController) {
+func SetUpRouting(userController controllers.UsersController, todoController controllers.ToDosController) {
 	engine := gin.Default()
 	engine.GET("/", func(c *gin.Context) {
 		c.String(200, "Hello Gin!!")
