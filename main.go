@@ -10,13 +10,13 @@ import (
 
 func main() {
 
-	repository2 := database.NewToDoRepository()
-	usecase2 := usecase.NewToDoUsecase(repository2)
-	controllers2 := controllers.NewToDoController(usecase2)
+	todo_repository := database.NewToDoRepository()
+	todo_usecase := usecase.NewToDoUsecase(todo_repository)
+	todo_controllers := controllers.NewToDoController(todo_usecase)
 
-	repository := database.NewUserRepository()
-	usecase := usecase.NewUserUsecase(repository)
-	controllers := controllers.NewUserController(usecase)
+	user_repository := database.NewUserRepository()
+	user_usecase := usecase.NewUserUsecase(user_repository)
+	user_controllers := controllers.NewUserController(user_usecase)
 
-	infrastructure.SetUpRouting(controllers, controllers2)
+	infrastructure.SetUpRouting(user_controllers, todo_controllers)
 }
